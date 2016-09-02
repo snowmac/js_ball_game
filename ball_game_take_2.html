@@ -5,23 +5,31 @@
   <title>Ball Game</title>
   <style type="text/css">
     body {
-      background-color: #F0EAD6;
+      background-color: #f6f6ef;
     }
     #board {
-      background-color: #ffffff;
+      background-color: #fff;
+      background: url("bg.png");
+      background-size: 550px;
       width: 500px;
       height: 300px;
       display: block;
     }
 
     #ball {
-      width: 50px;
-      height: 50px;
+      width: 25px;
+      height: 25px;
       border-radius: 100%;
       position: absolute;
+      top: 40px;
       margin-left: 20px;
       background: radial-gradient(circle at 10px 10px, blue, #000);
+    }
 
+    #container {
+      margin-left: auto;
+      margin-right: auto;
+      width: 600px;
     }
   </style>
 
@@ -84,12 +92,13 @@
   </script>
 </head>
 <body>
-
+<div id="container">
   <div id="board">
     <div id="ball"> </div>
   </div>
-<button id="moveFast">Move Fast</button>
-<button id="moveSlow">Move Slow</button>
+  <button id="moveFast">Move Fast</button>
+  <button id="moveSlow">Move Slow</button>
+</div>
 
 
 </body>
