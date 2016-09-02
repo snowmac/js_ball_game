@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <script src="https://code.jquery.com/jquery-3.1.0.min.js"   integrity="sha256-cCueBR6CsyA4/9szpPfrX3s49M9vUU5BgtiJj06wt/s="   crossorigin="anonymous"></script>
+  <title>Ball Game</title>
+  <style type="text/css">
+    body {
+      background-color: #F0EAD6;
+    }
+    #board {
+      background-color: #ffffff;
+      width: 500px;
+      height: 300px;
+      display: block;
+    }
+
+    #ball {
+      width: 50px;
+      height: 50px;
+      border-radius: 100%;
+      position: absolute;
+      margin-left: 20px;
+      background: radial-gradient(circle at 10px 10px, blue, #000);
+
+    }
+  </style>
+
+  <script type="text/javascript">
+    var fastMove = 10;
+    var slowMove = 4;
+    var defined_speed = slowMove;
+
+    var canGoUp = function(){
+      var $board = $("#board");
+      var top_left_y = $board.position().top;
+      var $ball = $("#ball");
+      var ballTopLeftY = $ball.position().top;
+
+      if (ballTopLeftY > (top_left_y+defined_speed)){
+        return true;
+      }
+      return false;
+    };
+
+    var canGoDown = function(){
+      var $board = $("#board");
+      var top_left_y = $board.position().top;
+      var $ball = $("#ball");
+      var ballTopLeftY = $ball.position().top;
+      var bottom_right_y = top_left_y + $board.height() - ($ball.height() + defined_speed);
+
+      if(ballTopLeftY < bottom_right_y){
+        return true;
+      }
+
+      return false;
+    };
+
+    var moveBall = function(keycode) {
+      if(keycode === 38 && canGoUp()) {
+        $("#ball").css({
+          top: $("#ball").position().top - defined_speed + "px"
+        });
+      } else if(keycode === 40 && canGoDown()) {
+        $("#ball").css({
+          top: $("#ball").position().top + defined_speed + "px"
+        });
+      }
+    };
+
+    $(document).ready(function(){
+      $(document).keydown(function(event){
+        moveBall(event.keyCode);
+      });
+
+      $("#moveFast").on("click", function(){
+        defined_speed = fastMove;
+      });
+
+      $("#moveSlow").on("click", function(){
+        defined_speed = slowMove;
+      });
+    });
+  </script>
+</head>
+<body>
+
+  <div id="board">
+    <div id="ball"> </div>
+  </div>
+<button id="moveFast">Move Fast</button>
+<button id="moveSlow">Move Slow</button>
+
+
+</body>
+</html>
